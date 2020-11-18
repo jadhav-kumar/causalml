@@ -470,7 +470,7 @@ class BaseXLearner(object):
             features (optional, np.array): list/array of feature names. If None, an enumerated list will be used.
             shap_dict (optional, dict): a dict of shapley value matrices. If None, shap_dict will be computed.
         """
-        override_checks = False if shap_dict is None else True
+        override_checks = not shap_dict is None
         explainer = Explainer(method='shapley', control_name=self.control_name,
                               X=X, tau=tau, model_tau=model_tau_feature,
                               features=features, override_checks=override_checks, classes=self._classes)
@@ -503,7 +503,7 @@ class BaseXLearner(object):
                 strongest interaction (note that to find to true strongest interaction you need to compute
                 the SHAP interaction values).
         """
-        override_checks = False if shap_dict is None else True
+        override_checks = not shap_dict is None
         explainer = Explainer(method='shapley', control_name=self.control_name,
                               X=X, tau=tau, model_tau=model_tau_feature,
                               features=features, override_checks=override_checks,
